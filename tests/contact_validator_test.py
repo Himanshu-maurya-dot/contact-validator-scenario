@@ -32,6 +32,34 @@ def test_is_valid_phone_true():
     assert result == True
 
 
+def test_normalize_phone():
+    """Test normalizing a phone number with dashes."""
+    assert normalize_phone("555-123-4567") == "5551234567"
+
+
+def test_is_valid_phone_type_error():
+    """Test that a non-string phone input raises TypeError."""
+    with pytest.raises(TypeError):
+        is_valid_phone(5551234567)
+
+
+def test_mask_email_short_local():
+    """Test masking an email with a one-character local part."""
+    assert mask_email("a@example.com") == "a@example.com"
+
+
+def test_mask_email_invalid():
+    """Test that masking an invalid email raises ValueError."""
+    with pytest.raises(ValueError):
+        mask_email("not-an-email")
+
+
+def test_normalize_phone_invalid():
+    """Test that normalizing an invalid phone raises ValueError."""
+    with pytest.raises(ValueError):
+        normalize_phone("123")
+
+
 def test_mask_email_basic():
     """Test masking a typical email address."""
     # Arrange
